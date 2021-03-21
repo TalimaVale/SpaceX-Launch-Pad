@@ -31,6 +31,49 @@ const LAUNCH_DETAILS_QUERY = gql`
   }
 `;
 
+// query LaunchListQuery($limit: Int!) {
+//   launchesPast(limit: $limit) {
+//     id
+//     mission_name
+//     details
+//     launch_date_utc
+//     launch_site {
+//       site_name_long
+//     }
+//     links {
+//       mission_patch_small
+//       video_link
+//       flickr_images
+//     }
+//     rocket {
+//       rocket_name
+//       rocket_type
+//       rocket {
+//         description
+//         engines {
+//           type
+//           number
+//           propellant_1
+//           propellant_2
+//         }
+//         first_stage {
+//           burn_time_sec
+//           engines
+//           reusable
+//         }
+//         second_stage {
+//           burn_time_sec
+//           engines
+//         }
+//       }
+//     }
+//     ships {
+//       name
+//       home_port
+//     }
+//   }
+// }
+
 interface ILaunchDetailsProps {}
 
 const LaunchDetails: React.FunctionComponent<ILaunchDetailsProps> = () => {

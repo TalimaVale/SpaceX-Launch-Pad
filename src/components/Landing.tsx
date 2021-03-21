@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
+import { H1Title } from './shared';
 import StarryNight from '../images/starry-night-sky.jpg';
 
 const LandingContainer = styled.div`
@@ -22,10 +23,11 @@ const LandingContainer = styled.div`
 
     background-image: url(${StarryNight});
     opacity: 0.5;
+    pointer-events: none;
   }
 `;
 
-const LandingIntroContainer = styled.div`
+const LandingHeadingContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,10 +46,8 @@ const IntroBackground = styled.div`
   background: rgba(20, 20, 30, 0.75);
 `;
 
-const LandingTitle = styled.h1`
+const LandingTitle = styled(H1Title)`
   margin: 0 0 30px 0;
-
-  font-size: 4rem;
 `;
 
 const XSpan = styled.span`
@@ -60,7 +60,7 @@ const StyledLink = styled(Link)`
   justify-content: space-between;
 
   width: fit-content;
-  min-width: 50%;
+  min-width: 45%;
   margin: 50px 0 20px 0;
   padding: 20px 35px;
 
@@ -123,7 +123,7 @@ interface IVideoOptions {
   playerVars: IPlayerVars;
 }
 
-const Landing: React.FunctionComponent<ILandingProps> = (props) => {
+const Landing: React.FunctionComponent<ILandingProps> = () => {
   const videoId = 'J442-ti-Dhg';
   const videoOptions: IVideoOptions = {
     height: '100%',
@@ -154,7 +154,7 @@ const Landing: React.FunctionComponent<ILandingProps> = (props) => {
 
   return (
     <LandingContainer>
-      <LandingIntroContainer>
+      <LandingHeadingContainer>
         <IntroBackground>
           <LandingTitle>
             SPACE<XSpan>X</XSpan> LAUNCH PAD
@@ -165,11 +165,11 @@ const Landing: React.FunctionComponent<ILandingProps> = (props) => {
           </p>
           <p>Enjoy the details of modern day space exploration!</p>
           <StyledLink to='/launch-list'>
-            <span>LAUNCH LIST</span>
+            <span>Launch List</span>
             <SVGArrowRight className='fas fa-long-arrow-alt-right'></SVGArrowRight>
           </StyledLink>
         </IntroBackground>
-      </LandingIntroContainer>
+      </LandingHeadingContainer>
       <LandingImageContainer>
         <StyledYouTube
           videoId={videoId}
