@@ -14,6 +14,27 @@ export const H2Title = styled.h2`
   text-transform: uppercase;
 `;
 
+export const H3Title = styled.h3`
+  margin: 0;
+
+  font-size: 2rem;
+  text-transform: uppercase;
+`;
+
+export const H5Title = styled.h5`
+  margin: 0;
+
+  font-size: 1.2rem;
+  text-transform: uppercase;
+`;
+
+export const H6Title = styled.h6`
+  margin: 0;
+
+  font-size: 1rem;
+  text-transform: uppercase;
+`;
+
 export const SpanTitle = styled.span`
   margin: 0;
 

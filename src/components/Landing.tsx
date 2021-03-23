@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
 import { H1Title } from './shared';
+import { SVGArrowRight } from './icons';
 import StarryNight from '../images/starry-night-sky.jpg';
 
 const LandingContainer = styled.div`
@@ -75,8 +76,6 @@ const StyledLink = styled(Link)`
   border-radius: 7px;
 `;
 
-const SVGArrowRight = styled.svg``;
-
 const LandingImageContainer = styled.div`
   width: 50vw;
   height: 100vh;
@@ -140,8 +139,7 @@ const Landing: React.FunctionComponent<ILandingProps> = () => {
   };
 
   const onVideoReady = (event: any) => {
-    // access to player in all event handlers via event.target
-    // event.target.mute();
+    event.target.playVideo();
   };
 
   const onVideoEnd = (event: any) => {
@@ -166,7 +164,7 @@ const Landing: React.FunctionComponent<ILandingProps> = () => {
           <p>Enjoy the details of modern day space exploration!</p>
           <StyledLink to='/launch-list'>
             <span>Launch List</span>
-            <SVGArrowRight className='fas fa-long-arrow-alt-right'></SVGArrowRight>
+            <SVGArrowRight styles={{ margin: '0 0 0 1rem' }} />
           </StyledLink>
         </IntroBackground>
       </LandingHeadingContainer>

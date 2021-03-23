@@ -8,7 +8,7 @@ const LogoContainer = styled(Link)`
   position: absolute;
   z-index: 5;
 
-  padding: 1rem;
+  padding: 0.5rem;
 
   text-decoration: none;
   color: #fff;

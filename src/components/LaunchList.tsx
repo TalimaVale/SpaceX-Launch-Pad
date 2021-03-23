@@ -1,12 +1,13 @@
-import { gql, useQuery } from '@apollo/client';
 import React from 'react';
+import { gql, useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { LaunchListQuery, LaunchListQueryVariables } from '../generated/LaunchListQuery';
 import styled from 'styled-components';
+import HeaderLogo from './HeaderLogo';
 import { H1Title, H2Title } from './shared';
+import { formatDate } from '../utils/formatDate';
 import StarryNight from '../images/starry-night-sky.jpg';
 import MarsNight from '../images/mars-starry-sky.jpg';
-import HeaderLogo from './HeaderLogo';
 
 const LaunchListContainer = styled.div`
   display: flex;
@@ -56,18 +57,19 @@ const ListHeadingContainer = styled.div`
 
 const ListTitle = styled(H1Title)`
   display: inline-block;
-  margin: 20vh 0 0 10vw;
+  margin: 15vh 0 0 10vw;
 `;
 
-const NextLaunchLink = styled.span`
+const NextLaunchLink = styled(Link)`
   margin: 0 0 0 20px;
 
   font-weight: bold;
   font-style: italic;
+  text-decoration: none;
   letter-spacing: 1px;
   color: gold;
 
-  opacity: 0.7;
+  opacity: 0.9;
 `;
 
 const PastLaunchesListContainer = styled.div`
@@ -103,8 +105,8 @@ const PastLaunchesListContainer = styled.div`
 
 const PastLaunchContainer = styled.div`
   margin: 50px 25px;
-  background: rgba(40, 40, 60, 0.4);
-  box-shadow: 0 0 7px 10px rgba(40, 40, 60, 0.4);
+  background: rgba(40, 40, 60, 0.3);
+  box-shadow: 0 0 7px 10px rgba(40, 40, 60, 0.3);
 `;
 
 const StyledLink = styled(Link)`
@@ -165,31 +167,14 @@ const LAUNCH_LIST_QUERY = gql`
   }
 `;
 
-interface IDateStringOptions {
-  weekday: 'long' | 'short' | 'narrow' | undefined;
-  year: 'numeric' | '2-digit' | undefined;
-  month: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' | undefined;
-  day: 'numeric' | '2-digit' | undefined;
-}
-
 interface ILaunchListProps {}
 
 const LaunchList: React.FunctionComponent<ILaunchListProps> = () => {
   const { data, loading } = useQuery<LaunchListQuery, LaunchListQueryVariables>(LAUNCH_LIST_QUERY, {
     variables: {
-      limit: 10
+      limit: 15
     }
   });
-
-  const formatDate = (date: string) => {
-    const options: IDateStringOptions = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    return new Date(date).toLocaleDateString(undefined, options);
-  };
 
   if (loading || !data) return <div>Loading...</div>;
 
@@ -198,7 +183,7 @@ const LaunchList: React.FunctionComponent<ILaunchListProps> = () => {
       <HeaderLogo />
       <ListHeadingContainer>
         <ListTitle>Launch List</ListTitle>
-        <NextLaunchLink>Next Upcoming Launch</NextLaunchLink>
+        <NextLaunchLink to={`/launch-list/110`}>Next Launch</NextLaunchLink>
       </ListHeadingContainer>
       <PastLaunchesListContainer>
         {data.launchesPast?.map((launch) => (
