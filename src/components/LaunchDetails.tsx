@@ -121,6 +121,13 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
+const StyledSVGArrowLeft = styled(SVGArrowLeft)`
+  width: 75px;
+  height: auto;
+
+  color: #fff;
+`;
+
 const BackArrowText = styled(H6Title)`
   padding: 3px 0 0 1rem;
 
@@ -301,7 +308,7 @@ const LaunchDetails: React.FunctionComponent<ILaunchDetailsProps> = () => {
         </CarouselContainer>
         <LaunchInfoContainer>
           <StyledLink to='/launch-list'>
-            <SVGArrowLeft fill={'#fff'} width={'5rem'} />
+            <StyledSVGArrowLeft />
             <BackArrowText>BACK</BackArrowText>
           </StyledLink>
           <ScrollableRocketInfo>
