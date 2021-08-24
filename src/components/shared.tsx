@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import breakpoints from '../utils/breakpoints';
 
 // CSS Snippets
 
@@ -22,22 +23,59 @@ export const H1Title = styled.h1`
 export const H2Title = styled.h2`
   margin: 0;
 
-  font-size: 3rem;
+  font-size: 1.4rem;
+  line-height: 1.5;
   text-transform: uppercase;
+
+  ${breakpoints.portraitTablet} {
+    font-size: 1.8rem;
+  }
+
+  ${breakpoints.landscapeTablet} {
+    font-size: 2rem;
+  }
+
+  ${breakpoints.laptop} {
+    line-height: 1.3;
+  }
+
+  ${breakpoints.desktop}{
+    font-size: 3rem;
+  }
 `;
 
 export const H3Title = styled.h3`
   margin: 0;
 
-  font-size: 2rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
+  
+  ${breakpoints.portraitPhone} {
+    font-size: 1.4rem;
+  }
+
+  ${breakpoints.landscapeTablet} {
+    font-size: 1.6rem;
+  }
+
+  ${breakpoints.desktop} {
+    font-size: 2rem;
+  }
 `;
 
 export const H5Title = styled.h5`
   margin: 0;
 
-  font-size: 1.2rem;
+  font-size: .9rem;
   text-transform: uppercase;
+  
+  ${breakpoints.portraitPhone} {
+    font-size: 1rem;
+  }
+
+  ${breakpoints.landscapeTablet} {
+    font-size: 1.2rem;
+  }
 `;
 
 export const H6Title = styled.h6`

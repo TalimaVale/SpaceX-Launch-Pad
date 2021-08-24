@@ -7,6 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import styled from 'styled-components';
 import HeaderLogo from './HeaderLogo';
 import { H2Title, H3Title, H5Title, H6Title } from './shared';
+import breakpoints from '../utils/breakpoints';
 import { SVGArrowLeft } from './icons';
 import { formatDate } from '../utils/formatDate';
 import StarryNight from '../images/starry-night-sky.jpg';
@@ -15,12 +16,13 @@ import MarsNight from '../images/mars-starry-sky.jpg';
 const LaunchDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  align-items: center;
 
+  padding-top: 4px;
+    
   color: #fff;
   background-color: #000;
-
+      
   &:before {
     content: '';
     position: absolute;
@@ -28,7 +30,7 @@ const LaunchDetailsContainer = styled.div`
     right: 0px;
     bottom: 0px;
     left: 0px;
-
+    
     background-image: url(${StarryNight});
     background-size: contain;
     background-repeat: repeat;
@@ -43,7 +45,7 @@ const LaunchDetailsContainer = styled.div`
     right: 0px;
     bottom: 0px;
     left: 0px;
-
+    
     background-image: url(${MarsNight});
     background-size: 50%;
     background-position: -25% 95%;
@@ -52,19 +54,46 @@ const LaunchDetailsContainer = styled.div`
     opacity: 0.3;
     pointer-events: none;
   }
+
+  ${breakpoints.landscapeTablet} {
+    align-items: start;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+  }
 `;
 
 const DetailsContainer = styled.div`
   display: flex;
+  flex-direction: column-reverse;
   z-index: 1;
-`;
 
+  ${breakpoints.landscapeTablet} {
+    flex-direction: row;
+  }
+`;
+    
 const CarouselContainer = styled.div`
-  width: 50vw;
-  height: 100vh;
+  width: 100vw;
+  height: 50vh;
 
   background: rgba(40, 40, 60, 0.3);
   box-shadow: 0 0 7px 10px rgb(40 40 60 / 30%);
+
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%);
+  -webkit-mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%);
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+  
+  ${breakpoints.landscapeTablet}{
+    width: 50vw;
+    height: 100vh;
+
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 `;
 
 const StyledCarousel = styled(Carousel)`
@@ -78,8 +107,10 @@ const StyledCarousel = styled(Carousel)`
     }
 
     > div > ul {
-      height: 100vh;
+      height: 50vh;
       align-items: center;
+
+      ${breakpoints.landscapeTablet} { height: 100vh; }
 
       > li {
         max-height: 100%;
@@ -91,66 +122,98 @@ const StyledCarousel = styled(Carousel)`
 
 const NoImagesCont = styled.div`
   position: relative;
-  top: 50vh;
+  top: 25vh;
 
   text-align: center;
 
-  transform: translateY(-50%);
+  ${breakpoints.landscapeTablet} {
+    top: 50vh;
+
+    transform: translateY(-50%);
+  }
 `;
 
 const LaunchImage = styled.img`
   max-width: 100%;
-  max-height: 100vh;
+  max-height: 50vh;
 
   object-fit: contain;
+
+  ${breakpoints.landscapeTablet} {
+    max-height: 100vh;
+  }
 `;
 
 const LaunchInfoContainer = styled.div`
-  width: 42vw;
-  padding: 0 4vw;
+  width: 100vw;
+  height: 50vh;
+  
+  ${breakpoints.landscapeTablet}{
+    width: 42vw;
+    padding: 0 4vw;
+  }
 `;
 
 const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
 
-  height: 10vh;
-  width: 10rem;
-  margin: 5vh 0 4vh 0;
+  width: 2rem;
+  padding: .3rem 1.2rem 0;
 
   text-decoration: none;
+
+  ${breakpoints.landscapeTablet} {
+    height: 10vh;
+    width: 10rem;
+    padding: 0;
+    margin: 5vh 0 4vh 0;
+  }
 `;
 
 const StyledSVGArrowLeft = styled(SVGArrowLeft)`
-  width: 75px;
+  width: 40px;
   height: auto;
 
   color: #fff;
+
+  ${breakpoints.landscapeTablet} {
+    width: 75px;
+  }
 `;
 
 const BackArrowText = styled(H6Title)`
+  display: none;
   padding: 3px 0 0 1rem;
 
   color: #fff;
+
+  ${breakpoints.landscapeTablet} {
+    display: block;
+  }
 `;
 
 const ScrollableRocketInfo = styled.div`
-  height: 70vh;
-  padding: 2vh 2.5vh;
+  height: 40vh;
+  width: 90vw;
+  margin: 1rem auto;
+  padding: 5px 10px;
   z-index: 1;
 
+  font-size: 0.9rem;
+
   border: 1px solid;
-  border-image: linear-gradient(to right, rgba(255, 255, 255, 0.2), 40%, transparent) 30;
-  box-shadow: -12px 0 20px -10px rgba(255, 255, 255, 0.1);
+  border-image: linear-gradient(to top, rgba(255, 255, 255, 0.2), 40%, transparent) 30;
+  box-shadow: 0 12px 20px -10px rgba(255, 255, 255, 0.1);
 
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
-    width: 0.8rem;
+    width: 0.4rem;
   }
 
   &::-webkit-scrollbar-button {
-    display: block;
+    display: none;
   }
 
   &::-webkit-scrollbar-track {
@@ -166,23 +229,70 @@ const ScrollableRocketInfo = styled.div`
     border-radius: 16px;
     box-shadow: inset 2px 2px 2px hsl(0deg 0% 100% / 25%), inset -2px -2px 2px rgb(0 0 0 / 25%);
   }
+
+  ${breakpoints.landscapePhone} {
+    > p {
+      margin: 1.2rem 0;
+    }
+  }
+  
+  ${breakpoints.portraitTablet} {
+    > p {
+      margin: 1.8rem 0;
+    }
+  }
+  
+  ${breakpoints.landscapeTablet} {
+    width: unset;
+    height: 70vh;
+    margin: 1rem;
+    padding: 2vh 2.5vh;
+
+    border-image: linear-gradient(to right, rgba(255, 255, 255, 0.2), 40%, transparent) 30;
+    box-shadow: -12px 0 20px -10px rgba(255, 255, 255, 0.1);
+
+    &::-webkit-scrollbar {
+      width: 0.8rem;
+    }
+    
+    &::-webkit-scrollbar-button {
+      display: block;
+    }
+    
+    > p {
+      margin: 1rem 0;
+    }
+  }
 `;
 
 const StyledH2Title = styled(H2Title)`
-  line-height: 1.4;
+  text-align: center;
+
+  ${breakpoints.landscapeTablet} {
+    text-align: left;
+  }
 `;
 
 const LaunchDate = styled.div`
   font-style: italic;
   letter-spacing: 1px;
+  text-align: center;
   color: #ddd;
+
+  ${breakpoints.landscapeTablet} {
+    text-align: left;
+  }
 `;
 
 const RocketMainInfo = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin: 3rem 0 0 0;
+  margin: 1.5rem 0 0 0;
+
+  ${breakpoints.landscapeTablet} {
+    margin: 3rem 0 0 0;
+  }
 `;
 
 const StyledH5Title = styled(H5Title)`

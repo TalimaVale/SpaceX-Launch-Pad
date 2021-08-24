@@ -237,20 +237,12 @@ const LaunchImage = styled.img`
 `;
 
 const LaunchMissionName = styled(H2Title)`
-  font-size: 1.4rem;
-  line-height: 1.5;
-
-  ${breakpoints.portraitTablet} {
-    font-size: 1.8rem;
-  }
-
   ${breakpoints.landscapeTablet} {
     font-size: 1.2rem;
   }
 
   ${breakpoints.laptop} {
     font-size: 1.5rem;
-    line-height: 1.3;
   }
 `;
 
