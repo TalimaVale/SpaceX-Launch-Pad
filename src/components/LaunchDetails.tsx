@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { LaunchDetailsQuery, LaunchDetailsQueryVariables } from '../generated/LaunchDetailsQuery';
@@ -289,6 +289,23 @@ const LaunchDetails: React.FunctionComponent<ILaunchDetailsProps> = () => {
     }
   );
 
+  const [viewportSize, setViewportSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setViewportSize([
+        Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0),
+        Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+      ]);
+    }
+
+    window.addEventListener('resize', updateSize);
+    updateSize();
+
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  const [vw] = viewportSize;
+
   if (loading || !data) return <div>Loading...</div>;
 
   return (
@@ -315,9 +332,11 @@ const LaunchDetails: React.FunctionComponent<ILaunchDetailsProps> = () => {
             <StyledH2Title>{data?.launch?.mission_name}</StyledH2Title>
             <LaunchDate>
               {data?.launch?.launch_date_utc && data?.launch?.launch_site?.site_name_long
-                ? `${formatDate(data?.launch?.launch_date_utc)} @ ${
-                    data?.launch?.launch_site?.site_name_long
-                  }`
+                ? vw >= 568
+                  ? `${formatDate(data?.launch?.launch_date_utc)} @ ${
+                      data?.launch?.launch_site?.site_name_long
+                    }`
+                  : `${formatDate(data?.launch?.launch_date_utc)}`
                 : '---'}
             </LaunchDate>
             <p>{data?.launch?.details}</p>

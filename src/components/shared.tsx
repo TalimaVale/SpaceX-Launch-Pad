@@ -1,4 +1,16 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+// CSS Snippets
+
+const H6Styles = `
+  margin: 0;
+
+  font-size: 1rem;
+  text-transform: uppercase;
+`;
+
+// Styled Components
 
 export const H1Title = styled.h1`
   margin: 0;
@@ -29,10 +41,16 @@ export const H5Title = styled.h5`
 `;
 
 export const H6Title = styled.h6`
-  margin: 0;
+  ${H6Styles}
+`;
 
-  font-size: 1rem;
-  text-transform: uppercase;
+export const H6TitleLink = styled(Link)`
+  ${H6Styles}
+
+  font-family: FjallaOne;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 3px;
 `;
 
 export const SpanTitle = styled.span`
